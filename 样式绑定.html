@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>样式绑定（对象方式）</title>
+	<script type="text/javascript" src="./vue.js"></script>
+	<style type="text/css">
+		.activated{
+			color:red;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div @click="handleDivClick"
+					:class="{activated:isActivated}">hello world</div>
+					<!-- 新增class属性，包含一个父组件中的对象。 -->
+	</div>
+	<script type="text/javascript">
+	var vm=new Vue({
+		el:"#app",
+		data:{
+			isActivated:false
+		},
+		methods:{
+			handleDivClick:function(){
+				this.isActivated=!this.isActivated;
+				// 取反
+			}
+		}
+
+	})
+	</script>
+</body>
+</html>

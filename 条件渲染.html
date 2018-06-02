@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>条件渲染</title>
+	<script type="text/javascript" src="./vue.js"></script>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<div id="app">
+<div v-if="show==='a'">
+	<!-- v-if和v-show的区别在于前者直接删除或添加DOM元素，后者只是display:none -->
+	用户名：
+	<input key="username"/>
+</div>
+<div v-else-if="show==='b'">
+	邮箱名：
+	<input key="email"/>
+<!-- 	如果没有key值，input的内容不会更新，会沿用缓存，key值表示了这个元素的唯一性。 -->
+</div>
+<div v-else>
+	密码：
+	<input key="spassword"/>
+</div>
+	</div>
+	<script type="text/javascript">
+	var vm=new Vue({
+		el:"#app",
+		data:{
+			show:'a'
+
+		},
+
+	})
+	</script>
+</body>
+</html>
