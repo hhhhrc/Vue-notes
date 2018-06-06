@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>发布订阅模式/总线/观察者模式</title>
+	<script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<child content='hu'></child>
+		<child content='richa'></child>
+	</div>
+	<script type="text/javascript">
+
+		Vue.prototype.bus=new Vue();
+
+		Vue.component('child',{
+			data:function(){
+				return {selfContent:this.content}
+			},
+			props:{
+				content:String
+			},
+			template:'<div @click="handleClick">{{selfContent}}</div>',
+			methods:{
+				handleClick:function(){
+					this.bus.$emit('change',this.selfContent);
+				},
+			},
+			mounted:function(){
+				var this_=this;
+				this.bus.$on('change',function(msg){
+					this_.selfContent=msg;
+				})
+			}
+		})
+		var vm=new Vue({
+			el:'#app',
+
+		})
+	</script>
+</body>
+</html>

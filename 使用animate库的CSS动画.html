@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>使用animate库</title>
+	<script type="text/javascript" src="./vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="./animate.css">
+	<style type="text/css">
+		.v-enter, .v-leave-to{
+			opacity:0;
+		}
+		.v-enter-active,
+		.v-leave-active{
+			transition:opacity 3s;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<transition 
+		:duration="{enter:2000,leave:4000}"
+		appear
+		enter-active-class="animated swing v-enter-active"
+		leave-active-class="animated shake v-leave-active"
+		appear-active-class="animated swing">
+	<!-- 使用animate库，必须自定义类名，类中要有animated -->
+	<!-- 需要过渡的话，过渡的属性别忘了添加进来。 -->
+	<!-- type=“transition”过渡动画结束为主 -->
+	<!-- duration自定义动画时长 -->
+		<div v-if="show">hello world</div>
+	</transition>
+	<button @click="handleClick">切换</button>
+</div>
+<script type="text/javascript">
+	var app=new Vue({
+		el:'#app',
+		data:{
+			show:true
+		},
+		methods:{
+			handleClick:function(){
+				this.show=!this.show;
+			}
+		}
+
+
+	})
+</script>
+</body>
+</html>

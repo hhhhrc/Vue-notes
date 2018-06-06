@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多个元素或组件的过渡动画</title>
+	<script type="text/javascript" src="./vue.js"></script>
+	<style type="text/css">
+	.v-enter, .v-leave-to{
+		opacity:0;
+	}
+	.v-enter-active,
+	.v-leave-active{
+		transition:opacity 1s;
+	}
+</style>
+</head>
+<body>
+	<div id="app">
+		<transition mode="out-in">
+			<!-- mode定义了元素过渡时是否先隐藏再显示 -->
+<!-- 			<child v-if="show"></child>
+			<child-one v-else></child-one> -->
+		<component :is="type"></component>
+		<!-- 动态组件 -->
+		</transition>
+		<button @click="handleClick">切换</button>
+	</div>
+	<script type="text/javascript">
+		Vue.component('child',{
+			template:'<div>child</div>'
+		})
+		Vue.component('child-one',{
+			template:'<div>child-one</div>'
+		})
+		var app=new Vue({
+			el:'#app',
+			data:{
+				// show:true
+				type:"child"
+			},
+			methods:{
+				handleClick:function(){
+					// this.show=!this.show;
+					this.type=this.type==='child' ?'child-one':'child'
+				},
+			}
+		})
+	</script>
+</body>
+</html>

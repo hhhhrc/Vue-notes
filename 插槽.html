@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>作用域插槽</title>
+	<script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+<!-- 		<child>
+			<template slot-scope="props"	>
+				<h1>{{props.item}}</h1>
+			</template> -->
+			<!-- 将插槽传过来的数据存入props，必须用template模板，里面如何显示可以自行定义。 -->
+		<!-- </child> -->
+
+		<child>
+			<div slot='header'>header</div>
+			<div slot='footer'>footer</div>			
+		</child>
+	</div>
+	<script type="text/javascript">
+
+		Vue.component('child',{
+			data:function(){
+				return{
+					list:[1,2,3,4]
+				}
+			},
+			// template:`<div>
+			// <ul>
+			// <slot v-for="item of list"
+			// :item=item></slot>
+			// </ul>
+			// </div>`
+			//将列表中的元素存入item
+			template:`<div>
+			<slot name="header"></slot>
+			<div class='content'>content</div>
+			<slot name="footer"></slot>
+			</div>`
+			//定义了插槽的模板，上面可以随意传内容！
+		})
+
+		var vm= new Vue({
+			el:'#app',
+		})
+	</script>
+</body>
+</html>

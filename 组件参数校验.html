@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件参数校验</title>
+	<script type="text/javascript" src="./vue.js"></script>
+
+</head>
+<body>
+	<div id="app">
+	<child content="bye"></child>
+	</div>
+
+	<script type="text/javascript">
+
+		Vue.component('child',{
+			props:{
+				// content:[Number,String]
+				content:{
+					type:String,//类型校验
+					required:false,//必须传
+					default:'default value',//没有传值时的默认值
+					validator:function(value){
+						return value.length>1
+					}//长度校验
+				}
+			},
+			template:'<div>{{content}}</div>',
+		})
+		var vm=new Vue({
+			el:"#app",
+		})
+	</script>
+</body>
+</html>
